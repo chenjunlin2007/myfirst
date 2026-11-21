@@ -1,0 +1,69 @@
+import os
+desktop_path=os.path.join(os.path.expanduser("~"),"Desktop")
+file_path=os.path.join(desktop_path,"账本.txt")
+amount={}
+total=0
+count=1
+class unvalueError(Exception):
+    pass
+while 1:
+    case=input("请输入金额--输入F时可退出\n")
+    if case=="F":
+        break
+    if case=='0':
+        try:
+            raise unvalueError("0没有必要--")
+            print("发生了一个错误-原因如下:")
+            print(err)
+        except ValueError as err:
+            print("发生了一个错误-原因如下:")
+            print(err)
+        continue
+    try:
+        money=float(case)
+        if money<=0:
+            print("请输入正确金额--")
+            continue
+        tip=input("请输入金额备注：")
+        amount[count]={"金额":money,"备注":tip}
+        total+=money
+        count+=1
+    except ValueError as err:
+            print("发生一个错误-原因如下：")
+            print(err)
+print("统计已结束--")
+count=count-1
+print(f"金额总计为{total}元-共{count}笔")
+for money,tip in amount.items():
+    print(f"{tip}-{money}")
+print("每笔按金额大小排序为：")
+for tip,money in sorted(amount.items(),key=lambda x:x[1]['金额'],reverse=True):
+    print(f"{tip}-{money}")
+for tip,money in amount.items():
+    with open(file_path,"a",encoding="utf-8") as file:
+      file.write(f"{tip}-{money}\n")
+print("已写入文件")
+input("运行已结束-回车键退出")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
